@@ -96,10 +96,24 @@ class SearchAlgos:
             self.frontier = sorted(self.frontier, key= lambda x: x[1])
         return False, node
 
-start= [[1,0,3],
-        [4,2,6],
-        [7,5,8]]
+    def aStarEuclidian(self):
+        self.frontier = list()
+        self.explored = dict()
+        self.frontier.append([self.node,self.node.h_val])
+        self.explored[str(self.node.state)] = 0
 
-goal = [[1,2,3],
-        [4,5,6],
-        [7,8,0]]
+        while(len(self.frontier) != 0):
+            self.max_queue_size = max(self.max_queue_size,len(self.frontier))
+            node = self.frontier.pop(0)[0]
+            if(node.goal_test()):
+                print("GOAL!!!")
+                return True, node
+            print(f"The best node to expand with g(n) = {node.g_val} and h(n) = {node.h_val}  is ")
+            for row in node.state:
+                for col in row:
+                    print(col, end=" ")
+                print()
+            self.nodes_expanded+=1
+            self.expand(node,2)
+            self.frontier = sorted(self.frontier, key= lambda x: x[1])
+        return False, node

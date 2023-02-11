@@ -37,8 +37,10 @@ if(choice ==2 ):
     node = Node(start,goal,1)
     search = SearchAlgos(node)
     res, resNode = search.aStarMisplaced()
-# if(choice ==3 ):
-#     result, node = search.uniformCostSearch()
+if(choice ==3 ):
+    node = Node(start,goal,2)
+    search = SearchAlgos(node)
+    res, resNode = search.aStarEuclidian()
     
 if(res):
     print(f"To solve this problem the search algorithm expanded a total of {search.nodes_expanded} nodes")
